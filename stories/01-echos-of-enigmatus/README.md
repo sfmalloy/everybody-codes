@@ -1,4 +1,4 @@
-# *Everybody Codes* - Story 1 Solutions
+# Story 1 Solutions
 
 These are my solutions to Story 1 - [*Echos of Enigmatus*](https://everybody.codes/story/1/quests) written in JavaScript.
 

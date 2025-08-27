@@ -1,6 +1,6 @@
 # Event 1 Solutions
 
-These are my solutions to Event 1 - [*The Kingdom of Algorithmia*](https://everybody.codes/event/1/quests)
+These are my solutions to Event 1 - [*The Kingdom of Algorithmia*](https://everybody.codes/event/1/quests) written in Python.
 
 ## Running
 
