@@ -52,11 +52,15 @@ func (q Quest01) Part2(input BoardSequence) string {
 }
 
 func (q Quest01) Part3(input BoardSequence) string {
-	// 1. precalculate all token values
-	// 2. BFS to the highest/lowest
-	hi := 0
-	lo := 0
-	return fmt.Sprintf("%d %d", hi, lo)
+	scores := make([][]int, len(input.instructions))
+	for i, seq := range input.instructions {
+		scores[i] = make([]int, 1+len(input.board[0])/2)
+		for c := 0; c < len(input.board[0]); c += 2 {
+			scores[i][c/2] = drop(input.board, seq, c)
+		}
+	}
+	best := getBestScores(scores, len(input.instructions))
+	return fmt.Sprintf("%d %d", best.lo, best.hi)
 }
 
 func drop(board []string, sequence string, startCol int) int {
@@ -64,7 +68,6 @@ func drop(board []string, sequence string, startCol int) int {
 	c := startCol
 	s := 0
 	for r < len(board) {
-		// fmt.Println(r, c)
 		if board[r][c] == '*' {
 			delta := 0
 			if sequence[s] == 'R' {
@@ -86,4 +89,45 @@ func drop(board []string, sequence string, startCol int) int {
 	start := (startCol + 2) / 2
 	end := (c + 2) / 2
 	return max(0, end*2-start)
+}
+
+type Pair struct {
+	hi int
+	lo int
+}
+
+func getBestScores(scores [][]int, depthLimit int) Pair {
+	return calculateScores(scores, 0, Pair{-1, -1}, 0, depthLimit, make(map[int]bool))
+}
+
+func calculateScores(scores [][]int, score int, best Pair, seqIndex int, depthLimit int, seen map[int]bool) Pair {
+	if seqIndex == depthLimit {
+		if best.hi == -1 {
+			best.hi = score
+		} else {
+			best.hi = max(best.hi, score)
+		}
+
+		if best.lo == -1 {
+			best.lo = score
+		} else {
+			found := 0
+			for _, v := range seen {
+				if v {
+					found += 1
+				}
+			}
+			best.lo = min(best.lo, score)
+		}
+		return best
+	}
+
+	for i := 0; i < len(scores[seqIndex]); i++ {
+		if !seen[i] {
+			seen[i] = true
+			best = calculateScores(scores, score+scores[seqIndex][i], best, seqIndex+1, depthLimit, seen)
+			seen[i] = false
+		}
+	}
+	return best
 }
