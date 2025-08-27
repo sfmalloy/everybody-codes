@@ -1,0 +1,7 @@
+[project]
+name = "everybody-codes-event-1-solutions"
+version = "0.1.0"
+description = "My solutions to Everybody Codes Event 1"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []

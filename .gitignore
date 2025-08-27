@@ -1,0 +1,15 @@
+node_modules/
+__pycache__/
+
+*.in
+.vscode/
+env/
+venv/
+
+*.txt
+*.json
+.env
+
+!requirements.txt
+!package*.json
+.venv/

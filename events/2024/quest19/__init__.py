@@ -1,0 +1,1 @@
+from quest19.quest import solve

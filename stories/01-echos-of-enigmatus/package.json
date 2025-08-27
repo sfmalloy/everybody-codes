@@ -1,0 +1,7 @@
+{
+  "devDependencies": {
+    "@types/node": "^22.15.30"
+  },
+  "type": "module",
+  "private": true
+}
