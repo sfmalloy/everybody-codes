@@ -11,7 +11,7 @@ func (q Quest02) Id() uint {
 	return 2
 }
 
-func (q Quest02) Parse(file *os.File, info os.FileInfo) string {
+func (q Quest02) Parse(file *os.File, info os.FileInfo, _part uint) string {
 	input := make([]byte, info.Size())
 	file.Read(input)
 	return strings.Trim(string(input), "\n")

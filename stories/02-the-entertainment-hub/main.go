@@ -62,7 +62,7 @@ func runQuest[I any, O any](quest quests.Quest[I, O], part uint, test bool) {
 	}
 
 	start := time.Now()
-	input := quest.Parse(file, info)
+	input := quest.Parse(file, info, part)
 	res := partFn(input)
 	end := time.Since(start)
 	fmt.Println(res)

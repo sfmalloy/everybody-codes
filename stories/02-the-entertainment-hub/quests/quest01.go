@@ -17,7 +17,7 @@ func (q Quest01) Id() uint {
 	return 1
 }
 
-func (q Quest01) Parse(file *os.File, info os.FileInfo) BoardSequence {
+func (q Quest01) Parse(file *os.File, info os.FileInfo, _part uint) BoardSequence {
 	bytes := make([]byte, info.Size())
 	file.Read(bytes)
 	args := strings.Split(strings.TrimRight(string(bytes), "\n"), "\n\n")
