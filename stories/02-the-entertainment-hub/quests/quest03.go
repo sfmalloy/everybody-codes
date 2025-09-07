@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"regexp"
+	"slices"
 	"strconv"
 	"strings"
 )
@@ -97,7 +98,13 @@ func (q Quest03) Part1(input Input) string {
 	return fmt.Sprintf("%d", rollNumber-1)
 }
 
+type Placement struct {
+	index     int
+	runLength int
+}
+
 func (q Quest03) Part2(input Input) string {
+	placements := make([]Placement, len(input.dice))
 	for i := range input.dice {
 		rollNumber := 1
 		for input.dice[i].trackIndex < len(input.racetrack) {
@@ -108,8 +115,19 @@ func (q Quest03) Part2(input Input) string {
 			rollNumber += 1
 		}
 		println(rollNumber - 1)
+		placements[i] = Placement{
+			index:     i + 1,
+			runLength: rollNumber - 1,
+		}
 	}
-	return "a"
+	slices.SortFunc(placements, func(a, b Placement) int {
+		return a.runLength - b.runLength
+	})
+	res := ""
+	for _, die := range placements {
+		res += fmt.Sprintf("%d,", die.index)
+	}
+	return res[:len(res)-1]
 }
 
 func (q Quest03) Part3(input Input) string {
