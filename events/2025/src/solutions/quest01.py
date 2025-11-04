@@ -3,7 +3,7 @@ from ..lib.quest import app
 
 
 @app.parser(quest=1)
-def parse(file: TextIOWrapper):
+def parse(file: TextIOWrapper) -> tuple[list[str], list[int]]:
     lines = [line.strip() for line in file.readlines()]
     return lines[0].split(','), [
         (-1 if step.startswith('L') else 1) * int(step[1:])
