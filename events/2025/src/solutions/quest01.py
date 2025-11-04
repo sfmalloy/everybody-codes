@@ -1,5 +1,5 @@
 from io import TextIOWrapper
-from ..lib.quest import app
+from lib.quest import app
 
 
 @app.parser(quest=1)

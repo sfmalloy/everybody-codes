@@ -1,9 +1,9 @@
 import importlib
-from src.lib.quest import app
+from lib.quest import app
 
 
 def main():
-    importlib.import_module('src.solutions')
+    importlib.import_module('solutions')
     print(app.run(1, 3))
 
 
