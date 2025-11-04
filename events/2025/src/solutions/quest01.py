@@ -16,7 +16,6 @@ def part1(names: list[str], dirs: list[int]):
     i = 0
     for d in dirs:
         i = max(0, min(i + d, len(names) - 1))
-        print(i)
     return names[i]
 
 
