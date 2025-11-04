@@ -12,7 +12,7 @@ def parse(file: TextIOWrapper):
 
 
 @app.solver(quest=1, part=1)
-def part1(names: list[str], dirs: list[int]):
+def part1(names: list[str], dirs: list[int]) -> int:
     i = 0
     for d in dirs:
         i = max(0, min(i + d, len(names) - 1))
@@ -20,12 +20,12 @@ def part1(names: list[str], dirs: list[int]):
 
 
 @app.solver(quest=1, part=2)
-def part2(names: list[str], dirs: list[int]):
+def part2(names: list[str], dirs: list[int]) -> int:
     return names[sum(dirs) % len(names)]
 
 
 @app.solver(quest=1, part=3)
-def part3(names: list[str], dirs: list[int]):
+def part3(names: list[str], dirs: list[int]) -> int:
     for d in dirs:
         i = d % len(names)
         names[0], names[i] = names[i], names[0]
