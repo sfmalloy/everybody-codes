@@ -14,6 +14,9 @@ USER_AGENT = 'email:sfmalloy.dev@gmail.com repo:github.com/sfmalloy/everybody-co
 
 
 def download(event: int, quest: int, part: int):
+    quest_path = Path(f'inputs/quest{quest:02d}')
+    if not quest_path.exists():
+        quest_path.mkdir()
     seed = __get_seed()
     encrypted = __get_encrypted_input(event, quest, part, seed)
     key = __get_aes_key(event, part, quest)
