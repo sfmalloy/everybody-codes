@@ -3,7 +3,7 @@ from lib.quest import app
 
 
 @app.parser(quest=3)
-def parse(file: TextIOWrapper):
+def parse(file: TextIOWrapper) -> list[int]:
     return list(map(int, file.read().strip().split(',')))
 
 
