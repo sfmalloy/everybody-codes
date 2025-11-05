@@ -1,4 +1,4 @@
-# auto import all days
+# auto import all quests
 import importlib
 import pkgutil
 

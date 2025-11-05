@@ -1,9 +1,12 @@
 import inspect
+import os
 
 from typing import Callable, Any
 from functools import wraps
 from io import TextIOWrapper
 from pathlib import Path
+
+from lib.api import download
 
 
 ParserFn = Callable[[TextIOWrapper], Any] | Callable[[TextIOWrapper, int], Any]
@@ -27,7 +30,9 @@ class QuestContainer:
                     else (Path(f'inputs/quest{quest:02d}/part{part}.txt'))
                 )
                 if not input_path.exists():
-                    raise Exception(f'Input file "{input_path}" not found')
+                    if filename:
+                        raise Exception(f'Input file "{input_path}" not found')
+                    download(int(os.getenv('EC_EVENT')), quest, part)
                 with open(input_path) as file:
                     parser = self._parsers.get(quest)
                     if not parser:
@@ -53,7 +58,7 @@ class QuestContainer:
     def run(self, quest: int, part: int, filename: str | None = None):
         solver = self._solvers.get((quest, part), None)
         if not solver:
-            raise Exception('Day not found')
+            raise Exception('Quest not found')
         return solver(filename)
 
 
