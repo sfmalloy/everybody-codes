@@ -44,7 +44,10 @@ def __get_encrypted_input(event: int, quest: int, part: int, seed: int):
     if path.exists():
         with path.open() as f:
             data = json.load(f)
+        if data.get(str(part)):
             return data.get(str(part))
+        else:
+            os.remove(path)
 
     res = httpx.get(f'{CDN_URL}/assets/{event}/{quest}/input/{seed}.json')
     data = __cache_response(path, res)
@@ -53,10 +56,14 @@ def __get_encrypted_input(event: int, quest: int, part: int, seed: int):
 
 def __get_aes_key(event: int, part: int, quest: int):
     path = Path(f'inputs/quest{quest:02d}/keys.json')
+    json_key = f'key{part}'
     if path.exists():
         with path.open() as f:
             data = json.load(f)
-            return data.get(f'key{part}')
+        if data.get(json_key):
+            return data.get(json_key)
+        else:
+            os.remove(path)
 
     res = httpx.get(
         f'{API_URL}/event/{event}/quest/{quest}',
@@ -64,7 +71,7 @@ def __get_aes_key(event: int, part: int, quest: int):
         cookies={'everybody-codes': os.getenv('EC_SESSION')},
     )
     data = __cache_response(path, res)
-    return data.get(f'key{part}')
+    return data.get(json_key)
 
 
 def __decrypt_input(key: str, encrypted: str) -> str:
