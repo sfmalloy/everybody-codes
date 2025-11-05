@@ -30,7 +30,7 @@ class ComplexNumber:
 
 
 @app.parser(quest=2)
-def parse(file: TextIOWrapper):
+def parse(file: TextIOWrapper) -> ComplexNumber:
     pair = re.match(r'A=\[(-?\d+),(-?\d+)\]', file.read())
     x, y = map(int, pair.groups())
     return ComplexNumber(x, y)
@@ -38,26 +38,16 @@ def parse(file: TextIOWrapper):
 
 @app.solver(quest=2, part=1)
 def part1(a: ComplexNumber) -> str:
-    r = ComplexNumber(0, 0)
+    res = ComplexNumber(0, 0)
     for _ in range(3):
-        r = r * r
-        r = r / ComplexNumber(10, 10)
-        r = r + a
-    return str(r)
+        res = res * res
+        res = res / ComplexNumber(10, 10)
+        res = res + a
+    return str(res)
 
 
 @app.solver(quest=2, part=2)
 def part2(a: ComplexNumber) -> str:
-    def engrave(pt: ComplexNumber):
-        r = ComplexNumber(0, 0)
-        for _ in range(100):
-            r = r * r
-            r = r / ComplexNumber(100000, 100000)
-            r = r + pt
-            if abs(r.x) > 1000000 or abs(r.y) > 1000000:
-                return False
-        return True
-
     count = 0
     for y in range(0, 101):
         for x in range(0, 101):
@@ -68,19 +58,20 @@ def part2(a: ComplexNumber) -> str:
 
 @app.solver(quest=2, part=3)
 def part3(a: ComplexNumber) -> str:
-    def engrave(pt: ComplexNumber):
-        r = ComplexNumber(0, 0)
-        for _ in range(100):
-            r = r * r
-            r = r / ComplexNumber(100000, 100000)
-            r = r + pt
-            if abs(r.x) > 1000000 or abs(r.y) > 1000000:
-                return False
-        return True
-
     count = 0
     for y in range(0, 1001):
         for x in range(0, 1001):
             if engrave(ComplexNumber(a.x + x, a.y + y)):
                 count += 1
     return count
+
+
+def engrave(point: ComplexNumber):
+    res = ComplexNumber(0, 0)
+    for _ in range(100):
+        res = res * res
+        res = res / ComplexNumber(100000, 100000)
+        res = res + point
+        if abs(res.x) > 1000000 or abs(res.y) > 1000000:
+            return False
+    return True
