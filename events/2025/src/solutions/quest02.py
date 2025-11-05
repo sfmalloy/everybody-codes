@@ -84,11 +84,3 @@ def part3(a: ComplexNumber) -> str:
             if engrave(ComplexNumber(a.x + x, a.y + y)):
                 count += 1
     return count
-
-
-# @app.solver(quest=2, part=3)
-# def part3(names: list[str], dirs: list[int]) -> int:
-#     for d in dirs:
-#         i = d % len(names)
-#         names[0], names[i] = names[i], names[0]
-#     return names[0]
