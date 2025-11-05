@@ -8,17 +8,17 @@ def parse(file: TextIOWrapper):
 
 
 @app.solver(quest=3, part=1)
-def part1(a: list[int]):
+def part1(a: list[int]) -> int:
     return sum(set(sorted(a, reverse=True)))
 
 
 @app.solver(quest=3, part=2)
-def part2(a: list[int]):
+def part2(a: list[int]) -> int:
     return sum(list(set(sorted(a)))[:20])
 
 
 @app.solver(quest=3, part=3)
-def part3(a: list[int]):
+def part3(a: list[int]) -> int:
     s = sorted(a, reverse=True)
     count = 0
     while len(s) > 0:
