@@ -6,10 +6,9 @@ import pyperclip
 from lib.quest import app
 from lib.cmdline import load_arguments
 
-dotenv.load_dotenv()
-
 
 def main():
+    dotenv.load_dotenv()
     importlib.import_module('solutions')
     args = load_arguments()
 
