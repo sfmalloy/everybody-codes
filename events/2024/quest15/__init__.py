@@ -1,1 +1,0 @@
-from quest15.quest import solve
