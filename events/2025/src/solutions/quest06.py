@@ -32,19 +32,18 @@ def part2(notes: str) -> int:
 @app.solver(quest=6, part=3)
 def part3(notes: str) -> int:
     middle = 0
-    left = 0
-    right = 0
+    sides = 0
     for i, tent in enumerate(notes):
         if not tent.isupper():
             continue
         t = tent.lower()
         for j in range(i - 1000, i + 1001):
             k = j % len(notes)
-            if notes[k].islower():
-                if t == notes[k]:
-                    middle += 1
-                    if j <= len(notes):
-                        left += 1
-                    if j >= 0:
-                        right += 1
-    return left + right + 998 * middle
+            if notes[k].isupper() or t != notes[k]:
+                continue
+            middle += 1
+            if j < len(notes):
+                sides += 1
+            if j >= 0:
+                sides += 1
+    return sides + 998 * middle
