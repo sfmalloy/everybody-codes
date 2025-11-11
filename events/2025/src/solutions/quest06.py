@@ -3,13 +3,14 @@ from lib.quest import app
 
 
 @app.parser(quest=6)
-def parse(file: TextIOWrapper) -> str:
-    return file.read().strip()
+def parse(file: TextIOWrapper, part: int) -> str:
+    if part == 3:
+        return file.read().strip()
+    return ''.join(reversed(file.read().strip()))
 
 
 @app.solver(quest=6, part=1)
 def part1(notes: str) -> int:
-    notes = ''.join(reversed(notes))
     pairs = 0
     for i, a in enumerate(notes):
         for b in notes[i + 1 :]:
@@ -20,7 +21,6 @@ def part1(notes: str) -> int:
 
 @app.solver(quest=6, part=2)
 def part2(notes: str) -> int:
-    notes = ''.join(reversed(notes))
     pairs = 0
     for i, a in enumerate(notes):
         for b in notes[i + 1 :]:
