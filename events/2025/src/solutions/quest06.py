@@ -33,16 +33,17 @@ def part2(notes: str) -> int:
 def part3(notes: str) -> int:
     middle = 0
     sides = 0
+    L = len(notes)
     for i, tent in enumerate(notes):
         if not tent.isupper():
             continue
         t = tent.lower()
         for j in range(i - 1000, i + 1001):
-            k = j % len(notes)
+            k = j % L
             if notes[k].isupper() or t != notes[k]:
                 continue
             middle += 1
-            if j < len(notes):
+            if j < L:
                 sides += 1
             if j >= 0:
                 sides += 1
