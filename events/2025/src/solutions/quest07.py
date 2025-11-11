@@ -4,20 +4,15 @@ from collections import defaultdict
 
 
 @app.parser(quest=7)
-def parse(file: TextIOWrapper, part: int) -> str:
-    names = ''
+def parse(file: TextIOWrapper) -> str:
+    lines = [line.strip() for line in file.readlines()]
     rules = defaultdict(list)
-    for line in file.readlines():
+    for line in lines[2:]:
         line = line.strip()
-        if not line:
-            continue
-        if '>' not in line:
-            names = line
-            continue
         key, vals = line.split(' > ')
         vals = vals.split(',')
         rules[key] = vals
-    return names.split(','), rules
+    return lines[0].split(','), rules
 
 
 @app.solver(quest=7, part=1)
