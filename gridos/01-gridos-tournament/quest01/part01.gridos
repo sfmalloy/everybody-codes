@@ -1,0 +1,10 @@
+HEADS AAA
+
+// move all heads in a 3-tall vertical line
+START *** PREP_LAST *** SDD
+PREP_LAST *** CHECK *** SSD
+
+CHECK A** CHECK _** RRR // if (A) then no potions
+CHECK B** CHECK P** RRR // if (B) then 1 potion
+CHECK C** CHECK PPP RRR // if (C) then 3 potions
+CHECK _** STOP _ SSS

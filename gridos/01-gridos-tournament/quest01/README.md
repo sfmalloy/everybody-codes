@@ -1,0 +1,7 @@
+# Quest 1
+
+Below is a writeup of my solution.
+
+First problem, the logic is pretty straightforward but writing it out in this state-machine way is interesting. My solutions to parts [1](./part01.gridos) and [2](./part02.gridos) are basically the same, create some amount of heads depending on the max amount of potions you need to defeat a bug, and write to all the heads simulaneously depending on what bug the top head sees.
+
+[Part 3](./part03.gridos) took some more planning, and I wrote a [helper script](./part03_helper.py) so I didn't have to manually type out all of the cases. The way I think about states is pretty much like functions. Part 3 has a `CHECK` state or function that checks all the different combinations of heads A and B. From there I basically hard code how many potions to place onto the board for each combo. I made a 3rd head who's only job is creating potions. I then have 12 `PLACE(N)` states because the maximum amount of potions we'll need to place for a single case is 12 (2 `D` bugs, plus 2 bonus potions for defeating a pair of bugs). Each `PLACE(N)` state calls `PLACE(N-1)`. In my helper script I made this a recursive function that goes down to 0 which is the base reset case which goes back to the `CHECK` state. (Note that there is no concept of parameters in state names, I just use parenthesis to make it read like you are calling a function called `PLACE`, but really each `PLACE(N)` is a unique state).

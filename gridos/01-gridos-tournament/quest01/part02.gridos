@@ -1,0 +1,13 @@
+HEADS AAAAA
+
+// move all heads in a 4-tall vertical line
+START ***** PREP_1 ***** SDDDD
+PREP_1 ***** PREP_2 ***** SSDDD
+PREP_2 ***** PREP_3 ***** SSSDD
+PREP_3 ***** CHECK ***** SSSSD
+
+CHECK A**** CHECK _**** RRRRR
+CHECK B**** CHECK P**** RRRRR
+CHECK C**** CHECK PPP** RRRRR
+CHECK D**** CHECK PPPPP RRRRR
+CHECK _**** STOP _____ SSSSS
