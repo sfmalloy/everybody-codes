@@ -8,8 +8,19 @@ import "core:flags"
 
 import "base:runtime"
 
-SOLVERS := [1][3](#type proc(input: []byte) -> ReturnValue){
-    [3](#type proc(input: []byte) -> ReturnValue){ solve1_1, solve1_2, solve1_3 }
+SOLVERS := [12][3](#type proc(input: []byte) -> ReturnValue){
+    [3](#type proc(input: []byte) -> ReturnValue){ solve1_1, solve1_2, solve1_3 },
+    [3](#type proc(input: []byte) -> ReturnValue){ solve2_1, solve2_2, solve2_3 },
+    [3](#type proc(input: []byte) -> ReturnValue){ solve3_1, solve3_2, solve3_3 },
+    [3](#type proc(input: []byte) -> ReturnValue){ solve4_1, solve4_2, solve4_3 },
+    [3](#type proc(input: []byte) -> ReturnValue){ solve5_1, solve5_2, solve5_3 },
+    [3](#type proc(input: []byte) -> ReturnValue){ solve6_1, solve6_2, solve6_3 },
+    [3](#type proc(input: []byte) -> ReturnValue){ solve7_1, solve7_2, solve7_3 },
+    [3](#type proc(input: []byte) -> ReturnValue){ solve8_1, solve8_2, solve8_3 },
+    [3](#type proc(input: []byte) -> ReturnValue){ solve9_1, solve9_2, solve9_3 },
+    [3](#type proc(input: []byte) -> ReturnValue){ solve10_1, solve10_2, solve10_3 },
+    [3](#type proc(input: []byte) -> ReturnValue){ solve11_1, solve11_2, solve11_3 },
+    [3](#type proc(input: []byte) -> ReturnValue){ solve12_1, solve12_2, solve12_3 },
 }
 
 main :: proc() {
@@ -24,7 +35,7 @@ main :: proc() {
 }
 
 solve :: proc(day: int, part: int) {
-    if day > len(SOLVERS) || part > len(SOLVERS[day]) {
+    if day < 1 || part < 1 || day > len(SOLVERS) || part > len(SOLVERS[day]) {
         fmt.println("Invalid day or part")
         return
     }
